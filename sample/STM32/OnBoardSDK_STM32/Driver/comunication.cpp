@@ -1,15 +1,15 @@
 #include "comunication.h"
 #include "main.h"
 
-
+#define SEND_BUF_SIZE 1200
 
 bool isACKProcessed    = false;
 bool ackReceivedByUser = false;
 DJI::OSDK::ACK::ErrorCode waitForACK();
 static void DMA_Config(DMA_Stream_TypeDef *DMA_Streamx,u32 chx,u32 par,u32 mar,u16 ndtr);
+u8 Pre_data[SEND_BUF_SIZE];	//发送数据缓冲区
 
 
-/*
 static void Ano_Usart_Config()
 {
     GPIO_InitTypeDef GPIO_InitStructure;
@@ -44,7 +44,7 @@ static void Ano_Usart_Config()
 			;	
 	  DMA_Config(DMA1_Stream4,DMA_Channel_4,(u32)&UART4->DR,(u32)Pre_data,40);
 	  USART_DMACmd(UART4,USART_DMAReq_Tx,ENABLE);
-}*/
+}
 
 
 static void Usart2_Gpio_Config(void)
@@ -137,7 +137,7 @@ void UsartConfig()
 {
 		Usart2_Config();
 		Usart3_Config();
-//	Ano_Usart_Config();
+  	Ano_Usart_Config();
 }
 
 
